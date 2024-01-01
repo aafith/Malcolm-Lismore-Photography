@@ -53,7 +53,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                     $imgUrl = $row['image_url'];
                     ?>
                     
-            <img src="images/<?php echo $row['image_url']; ?>" style="width: 60px; height: 60px; margin-right: 10px;">
+            <img src="images/<?php echo $row['image_url']; ?>" style="width: 60px; height: 60px; margin-right: 10px; ">
             <?php
                 }
             ?>
@@ -64,27 +64,24 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
         </div>
 
         <div class="menu">
-            <button class="menu-link btn active" onclick="openmenu('add')"><i class="fa-solid fa-images"></i> Add
-                Gallery</button>
-            <button class="menu-link btn" onclick="openmenu('message')"><i class="fa-solid fa-message"></i></i>
-                Message</button>
+            <button class="menu-link btn active" onclick="openmenu('add')"><i class="fa-solid fa-image"></i> Galleries</button>
+            <button class="menu-link btn" onclick="openmenu('d-services')"><i class="fa-solid fa-laptop"></i> SERVICES</button>
+            <button class="menu-link btn" onclick="openmenu('message')"><i class="fa-solid fa-message"></i></i> Enquiries</button>
             <button class="menu-link btn" onclick="openmenu('admin')"><i class="fa-solid fa-user"></i> Admin</button>
-            <button class="menu-link btn" onclick="openmenu('d-services')"><i class="fa-solid fa-camera"></i> Services</button>
-            <a class="btn logout" href="php/logout.php"><i class="fa-solid fa-arrow-left"></i> Log out</a>
+            
+            <a class="btn logout" href="php/logout.php"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
         </div>
     </nav>
 
     <div class="container" id="main-area">
         <div class="menu-contents active-menu" id="add">
             <div class="container">
-                <button class="add-btn btn"><a href="new-image.php"><i class="fa-solid fa-plus"></i> Add New</a></button>
+                <button class="add-btn btn"><a href="new-image.php"><i class="fa-solid fa-plus"></i> ADD NEW IMAGE</a></button>
                 <table class="table table-bordered m-5">
                     <thead>
                         <tr class="text-center align-middle">
                             <th scope="col">Image</th>
                             <th scope="col">Category</th>
-                            <th scope="col">Tag</th>
-                            <th scope="col">Link</th>
                             <th scope="col">Options</th>
                         </tr>
                     </thead>
@@ -101,8 +98,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                                 $id = $row['id'];
                                 $imgUrl = $row['image_url'];
                                 $catg = $row['image_cat'];
-                                $tag = $row['tag'];
-                                $link = $row['link'];
 
                             
                                 ?>
@@ -110,16 +105,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                         <tr class="text-center align-middle">
                             <td class="db-image"><img src="images/<?php echo $row['image_url']; ?>"></td>
                             <td><?php echo $catg?></td>
-                            <td><?php echo $tag?></td>
-                            <td><?php echo $link?></td>
 
 
                             <td class="text-center">
                                 <button class="btn btn-primary"><a href="php/editImg.php?edit=<?php echo $id ?>">
-                                <i class="fa-solid fa-pen-to-square"></i></a></button>
-                                <br />
-                                <br />
-                                <button class="btn btn-danger"><a href="php/deleteImg.php?delete=<?php echo $id ?>"><i class="fa-solid fa-basket-shopping"></i></a></button>
+                                <i class="fa-solid fa-pen-to-square"></i> Edit</a></button>
+                                <button class="btn btn-danger"><a href="php/deleteImg.php?delete=<?php echo $id ?>"><i class="fa-solid fa-trash"></i> Delete</a></button>
 
                             </td>
 
@@ -144,6 +135,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                         <tr class="text-center align-middle">
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
                             <th scope="col">Message</th>
                             <th scope="col">Options</th>
                         </tr>
@@ -161,6 +153,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                                 $id = $row['id'];
                                 $name = $row['name'];
                                 $email = $row['email'];
+                                $phone = $row['phone'];
                                 $message = $row['message'];
 
                             
@@ -169,12 +162,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                         <tr class="text-center align-middle">
                             <td><?php echo $name?></td>
                             <td><?php echo $email?></td>
+                            <td><?php echo $phone?></td>
                             <td><?php echo $message?></td>
 
 
                             <td class="text-center">
                                 <button class="btn btn-danger"><a
-                                        href="php/message-delete.php?delete=<?php echo $id ?>"><i class="fa-solid fa-basket-shopping"></i> Delete</a></button>
+                                        href="php/message-delete.php?delete=<?php echo $id ?>"><i class="fa-solid fa-trash"></i> Delete</a></button>
 
                             </td>
 
@@ -194,7 +188,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
 
         <div class="menu-contents" id="admin">
             <div class="container">
-                <button class="add-btn btn"><a href="new-admin.php"><i class="fa-solid fa-plus"></i> Add New</a></button>
+                <button class="add-btn btn"><a href="new-admin.php"><i class="fa-solid fa-plus"></i> ADD NEW ADMIN</a></button>
                 <table class="table table-bordered m-5">
                     <thead>
                         <tr class="text-center align-middle">
@@ -233,7 +227,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
 
                             <td class="text-center">
                                 <button class="btn btn-primary"><a href="php/edit.php?edit=<?php echo $id ?>"><i class="fa-solid fa-pen-to-square"></i> Edit</a></button> &nbsp;
-                                <button class="btn btn-danger"><a href="php/delete.php?delete=<?php echo $id ?>"><i class="fa-solid fa-basket-shopping"></i> Delete</a></button>
+                                <button class="btn btn-danger"><a href="php/delete.php?delete=<?php echo $id ?>"><i class="fa-solid fa-trash"></i> Delete</a></button>
 
                             </td>
 
@@ -257,7 +251,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                     <thead>
                         <tr class="text-center align-middle">
                             <th scope="col">Name</th>
-                            <th scope="col">Description</th>
+                            <th scope="col">1st Description</th>
+                            <th scope="col">2nd Description</th>
                             <th scope="col">Price</th>
                             <th scope="col">Options</th>
                         </tr>
@@ -274,7 +269,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                             while ($row = mysqli_fetch_array($result)) {
                                 $id = $row['id'];
                                 $name = $row['name'];
-                                $description = $row['description'];
+                                $first_description = $row['first_description'];
+                                $second_description = $row['second_description'];
                                 $price = $row['price'];
 
                             
@@ -282,7 +278,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
 
                         <tr class="text-center align-middle">
                             <td><?php echo $name?></td>
-                            <td><?php echo $description?></td>
+                            <td><?php echo $first_description?></td>
+                            <td><?php echo $second_description?></td>
                             <td><?php echo $price?></td>
 
 

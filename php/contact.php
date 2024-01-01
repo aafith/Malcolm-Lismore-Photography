@@ -3,7 +3,7 @@
 include "db_conn.php";
 
 
-if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['message'])) {
+if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['message'])) {
     function validate($data)
     {
         $data = trim($data);
@@ -14,32 +14,33 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['message']))
 
     $name = validate($_POST['name']);
     $email = validate($_POST['email']);
+    $phone = validate($_POST['phone']);
     $message = validate($_POST['message']);
 
-    if (empty($name) || empty($email) || empty($message)) {
-        header("Location: ../index.php?error=All fields are required");
+    if (empty($name) || empty($email) ||  empty($phone) || empty($message)) {
+        header("Location: ../contact.php?error=All fields are required");
         exit();
     } else {
         // Prepare and execute the SQL query
-        $sql = "INSERT INTO message (name, email, message) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO message (name, email, phone, message) VALUES (?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
 
         if ($stmt) {
-            $result = $stmt->execute([$name, $email, $message]);
+            $result = $stmt->execute([$name, $email, $phone, $message]);
 
             if ($result) {
-                header("Location: ../index.php?success=Your Message Sent successfully");
+                header("Location: ../contact.php?success=Your Message Sent successfully");
                 exit();
             } else {
-                header("Location: ../index.php?error=Database error");
+                header("Location: ../contact.php.php?error=Database error");
                 exit();
             }
         } else {
-            header("Location: ../index.php?error=SQL statement preparation failed");
+            header("Location: ../contact.php?error=SQL statement preparation failed");
             exit();
         }
     }
 } else {
-    header("Location: ../index.php");
+    header("Location: ../contact.php");
     exit();
 }

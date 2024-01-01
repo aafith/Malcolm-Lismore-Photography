@@ -14,7 +14,8 @@ if (isset($_GET['edit'])) {
     while($row=mysqli_fetch_array($result)){
     $id = $row['id'];
     $name = $row['name'];
-    $description = $row['description'];
+    $first_description = $row['first_description'];
+    $second_description = $row['second_description'];
     $price = $row['price'];
     }
 }
@@ -26,15 +27,16 @@ if (isset($_GET['edit'])) {
 <?php
 
 
-if (isset($_POST['name']) && isset($_POST['description']) && isset($_POST['price']) && isset($_GET['edit']))
+if (isset($_POST['name']) && isset($_POST['first_description']) && isset($_POST['second_description']) && isset($_POST['price']) && isset($_GET['edit']))
 {
     $edit = $_GET['edit'];
     $name = $_POST['name'];
-    $description = $_POST['description'];
+    $first_description = $_POST['first_description'];
+    $second_description = $_POST['second_description'];
     $price = $_POST['price'];
     
     // Prepare and execute the SQL query
-    $sql = "UPDATE services set name= '$name', description= '$description', price= '$price' where id= '$edit'";
+    $sql = "UPDATE services set name= '$name', first_description= '$first_description', second_description= '$second_description' , price= '$price' where id= '$edit'";
     if(mysqli_query($conn,$sql)) {
         echo '<script> location.replace("../dashboard.php")</script>'; 
         exit();
@@ -88,7 +90,8 @@ if (isset($_POST['name']) && isset($_POST['description']) && isset($_POST['price
             <p class="success"><?php echo $_GET['success']; ?></p>
             <?php } ?>
             <input type="text" name="name" placeholder="Name" value="<?php echo $name; ?>" />
-            <input type="text" name="description" placeholder="Description" value="<?php echo $description; ?>" />
+            <input type="text" name="first_description" placeholder="First Description" value="<?php echo $first_description; ?>" />
+            <input type="text" name="second_description" placeholder="Second Description" value="<?php echo $second_description; ?>" />
             <input type="text" name="price" placeholder="Price" value="<?php echo $price; ?>" />
             <button type="submit" class="btn submit-btn">Edit</button>
         </form>

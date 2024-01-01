@@ -40,8 +40,6 @@
             <p class="success"><?php echo $_GET['success']; ?></p>
             <?php } ?>
             <input type="text" name="catg" placeholder="Category" />
-            <input type="text" name="tag" placeholder="Tag" />
-            <input type="text" name="link" placeholder="Link" />
             <input type="file" name="imgUrl" accept=".jpg, .jpeg, .png" id="file-upload" class="hidden-input" />
             <label for="file-upload" class="upload-button rounded-0">
                 <span><i class="fa-solid fa-cloud-arrow-up"></i> Upload File</span>

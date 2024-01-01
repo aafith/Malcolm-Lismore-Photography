@@ -1,7 +1,7 @@
 <?php
 include "db_conn.php";
 
-if (isset($_POST['catg']) && isset($_POST['tag']) && isset($_POST['link'])) {
+if (isset($_POST['catg'])) {
     function validate($data)
     {
         $data = trim($data);
@@ -11,10 +11,8 @@ if (isset($_POST['catg']) && isset($_POST['tag']) && isset($_POST['link'])) {
     }
 
     $catg = validate($_POST['catg']);
-    $tag = validate($_POST['tag']);
-    $link = validate($_POST['link']);
 
-    if (empty($catg) || empty($tag) || empty($link)) {
+    if (empty($catg)) {
         header("Location: ../new-image.php?error=All fields are required");
         exit();
     } else {
@@ -31,7 +29,7 @@ if (isset($_POST['catg']) && isset($_POST['tag']) && isset($_POST['link'])) {
             $img_ex = strtolower(end($img_ex));
 
             if(!in_array($img_ex, $allowed_exs)) {
-                header("Location: ../new-image.php?error=Invalid Image Extenstion");
+                header("Location: ../new-image.php?error=Invalid Image Extension");
                 exit(); 
             }
             
@@ -42,14 +40,14 @@ if (isset($_POST['catg']) && isset($_POST['tag']) && isset($_POST['link'])) {
                 move_uploaded_file($tmp_name, '../images/' . $new_img_name);
 
                 // Insert into Database
-                $sql = "INSERT INTO gallery (image_url, image_cat, tag, link) VALUES (?, ?, ?, ?)";
+                $sql = "INSERT INTO gallery (image_url, image_cat) VALUES (?, ?)";
                 $stmt = $conn->prepare($sql);
 
                 if($stmt) {
-                    $result = $stmt->execute([$new_img_name, $catg, $tag, $link]);
+                    $result = $stmt->execute([$new_img_name, $catg]);
 
                     if($result) {
-                        header("Location: ../new-image.php?success=add gallary successfully");
+                        header("Location: ../new-image.php?success=add gallery successfully");
                         exit();
                     }else {
                         header("Location: ../new-image.php?error=Database error");

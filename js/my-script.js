@@ -10,41 +10,6 @@ function closeMenu() {
   sidemenu.style.right = "-200px";
 }
 
-// Drop Button
-
-function clickFun() {
-  document.getElementById("dropNav").classList.toggle("show");
-}
-
-window.onclick = function (event) {
-  if (!event.target.matches(".drop-btn")) {
-    var dropdowns = document.getElementsByClassName("drop-nav");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains("show")) {
-        openDropdown.classList.remove("show");
-      }
-    }
-  }
-};
-
-// Tab Open
-
-var tablinks = document.getElementsByClassName("tab-link");
-var tabcontents = document.getElementsByClassName("tab-contents");
-
-function openTab(tabname) {
-  for (tablink of tablinks) {
-    tablink.classList.remove("active");
-  }
-  for (tabcontent of tabcontents) {
-    tabcontent.classList.remove("active-tab");
-  }
-  event.currentTarget.classList.add("active");
-  document.getElementById(tabname).classList.add("active-tab");
-}
-
 // Menu Open
 
 var menulinks = document.getElementsByClassName("menu-link");
@@ -61,13 +26,15 @@ function openmenu(menuname) {
   document.getElementById(menuname).classList.add("active-menu");
 }
 
+
+
 // Load More
 let loadmore = document.querySelector("#moreBtn");
-let currentItem = 3;
+let currentItem = 6;
 
 loadmore.onclick = () => {
   let works = [...document.querySelectorAll(".work")];
-  for (var i = currentItem; i < currentItem + 3; i++) {
+  for (var i = currentItem; i < currentItem + 6; i++) {
     works[i].style.display = "inline-block";
   }
   currentItem += 3;

@@ -15,8 +15,6 @@ if (isset($_GET['edit'])) {
     $id = $row['id'];
     $imgUrl = $row['image_url'];
     $catg = $row['image_cat'];
-    $tag = $row['tag'];
-    $link = $row['link'];
     }
 }
 
@@ -26,12 +24,10 @@ if (isset($_GET['edit'])) {
 <?php
 
 
-if (isset($_POST['catg']) && isset($_POST['tag']) && isset($_POST['link']) && isset($_GET['edit']))
+if (isset($_POST['catg']) && isset($_GET['edit']))
 {
     $edit = $_GET['edit'];
     $catg = $_POST['catg'];
-    $tag = $_POST['tag'];
-    $link = $_POST['link'];
 
 
     if (isset($_FILES['imgUrl']['error']) === 4) {
@@ -47,7 +43,7 @@ if (isset($_POST['catg']) && isset($_POST['tag']) && isset($_POST['link']) && is
         $img_ex = strtolower(end($img_ex));
 
         if(!in_array($img_ex, $allowed_exs)) {
-            header("Location: editImg.php?error=Invalid Image Extenstion");
+            header("Location: editImg.php?error=Invalid Image Extension");
             exit(); 
         }
         else {
@@ -57,7 +53,7 @@ if (isset($_POST['catg']) && isset($_POST['tag']) && isset($_POST['link']) && is
             move_uploaded_file($tmp_name, '../images/' . $new_img_name);
 
             // Prepare and execute the SQL query
-            $sql = "UPDATE gallery set image_url= '$new_img_name', image_cat= '$catg', tag= '$tag', link= '$link' where id= '$edit'";
+            $sql = "UPDATE gallery set image_url= '$new_img_name', image_cat= '$catg' where id= '$edit'";
             if(mysqli_query($conn,$sql)) {
                 echo '<script> location.replace("../dashboard.php")</script>'; 
                 exit();
@@ -118,8 +114,6 @@ if (isset($_POST['catg']) && isset($_POST['tag']) && isset($_POST['link']) && is
             <p class="success"><?php echo $_GET['success']; ?></p>
             <?php } ?>
             <input type="text" name="catg" placeholder="Category" value="<?php echo $catg; ?>" />
-            <input type="text" name="tag" placeholder="Tag" value="<?php echo $tag; ?>" />
-            <input type="text" name="link" placeholder="Link" value="<?php echo $link; ?>" />
             <input type="file" name="imgUrl" accept=".jpg, .jpeg, .png" id="file-upload" class="hidden-input" />
             <label for="file-upload" class="upload-button rounded-0">
                 <span><i class="fa-solid fa-cloud-arrow-up"></i> Upload File</span>
